@@ -252,9 +252,78 @@ select.input-control {
     gap: 1rem;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
+    .auth-wrapper {
+        padding: 1.25rem;
+        align-items: flex-start;
+        padding-top: 2.5rem;
+    }
+
+    .auth-card {
+        padding: 2rem 1.5rem;
+        max-width: 100%;
+    }
+
+    .auth-header h2 {
+        font-size: 1.4rem;
+    }
+
     .form-row {
         grid-template-columns: 1fr;
         gap: 0;
     }
+
+    .file-upload-wrapper {
+        padding: 1.5rem 1rem;
+    }
+
+    .file-upload-content i {
+        font-size: 1.75rem;
+    }
+
+    .file-upload-text {
+        font-size: 0.85rem;
+    }
+
+    .file-upload-hint {
+        font-size: 0.72rem;
+    }
 }
+
+@media (max-width: 480px) {
+    .auth-wrapper {
+        padding: 1rem 0.75rem;
+        padding-top: 1.5rem;
+    }
+
+    .auth-card {
+        padding: 1.75rem 1.25rem;
+        border-radius: var(--radius-md);
+    }
+
+    .auth-header {
+        margin-bottom: 1.75rem;
+    }
+
+    .auth-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.1rem;
+    }
+
+    .form-label {
+        font-size: 0.82rem;
+    }
+
+    .input-control {
+        padding: 0.7rem 0.95rem;
+        font-size: 0.88rem;
+    }
+
+    .form-footer {
+        font-size: 0.82rem;
+    }
+}
+

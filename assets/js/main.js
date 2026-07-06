@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 2. MOBILE NAVIGATION TOGGLE
+    // 2. MOBILE NAVIGATION TOGGLE (Landing Page)
     const navToggle = document.querySelector('.mobile-nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
     if (navToggle && navMenu) {
@@ -25,6 +25,69 @@ document.addEventListener('DOMContentLoaded', function() {
                     icon.className = 'fas fa-times';
                 } else {
                     icon.className = 'fas fa-bars';
+                }
+            }
+        });
+    }
+
+    // 2b. MOBILE DASHBOARD SIDEBAR TOGGLE
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+        // Create mobile header bar
+        const mobileDbHeader = document.createElement('div');
+        mobileDbHeader.className = 'mobile-db-header';
+        
+        const brandContent = sidebar.querySelector('.sidebar-brand') ? sidebar.querySelector('.sidebar-brand').innerHTML : '<i class="fas fa-book-open-reader"></i><span>DonasiBuku</span>';
+        
+        mobileDbHeader.innerHTML = `
+            <button class="mobile-db-toggle" aria-label="Buka Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="mobile-db-brand">
+                ${brandContent}
+            </div>
+            <div style="width: 40px;"></div>
+        `;
+        document.body.appendChild(mobileDbHeader);
+
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        document.body.appendChild(overlay);
+
+        // Handle toggle click
+        const dbToggleBtn = mobileDbHeader.querySelector('.mobile-db-toggle');
+        if (dbToggleBtn) {
+            dbToggleBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                const icon = dbToggleBtn.querySelector('i');
+                if (sidebar.classList.contains('active')) {
+                    icon.className = 'fas fa-times';
+                } else {
+                    icon.className = 'fas fa-bars';
+                }
+            });
+        }
+
+        // Close when overlay is clicked
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            if (dbToggleBtn) {
+                const icon = dbToggleBtn.querySelector('i');
+                if (icon) icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                if (dbToggleBtn) {
+                    const icon = dbToggleBtn.querySelector('i');
+                    if (icon) icon.className = 'fas fa-bars';
                 }
             }
         });

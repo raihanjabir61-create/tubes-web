@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS tabel_donasi (
     kategori VARCHAR(100) NOT NULL,
     kondisi ENUM('baru', 'bekas_layak') NOT NULL,
     jumlah INT NOT NULL DEFAULT 1,
-    foto VARCHAR(255) NOT NULL,
+    foto LONGTEXT NOT NULL,
     status ENUM('pending', 'diterima', 'ditolak') NOT NULL DEFAULT 'pending',
     tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_user) REFERENCES tabel_users(id) ON DELETE CASCADE

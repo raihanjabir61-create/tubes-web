@@ -38,37 +38,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($file_size > 2 * 1024 * 1024) {
             $error_msg = 'Ukuran file terlalu besar! Maksimal 2MB.';
         } else {
-            // Create uploads folder if not exists
+            // Read file content and convert to base64
+            $file_data = file_get_contents($file_tmp);
+            $base64_data = 'data:' . mime_content_type($file_tmp) . ';base64,' . base64_encode($file_data);
+
+            // Optional: save to local uploads folder if writable (for local fallback)
             $upload_dir = '../uploads/';
-            if (!file_exists($upload_dir)) {
-                mkdir($upload_dir, 0755, true);
+            if (is_writable($upload_dir) || (!file_exists($upload_dir) && @mkdir($upload_dir, 0755, true))) {
+                $unique_filename = uniqid('book_', true) . '.' . $ext;
+                @move_uploaded_file($file_tmp, $upload_dir . $unique_filename);
             }
 
-            // Generate unique filename to prevent collisions
-            $unique_filename = uniqid('book_', true) . '.' . $ext;
-            $destination = $upload_dir . $unique_filename;
+            $conn = get_db_connection();
+            
+            $judul_clean = db_escape($judul_buku);
+            $penulis_clean = db_escape($penulis);
+            $kategori_clean = db_escape($kategori);
+            $kondisi_clean = db_escape($kondisi);
+            $foto_clean = db_escape($base64_data);
 
-            if (move_uploaded_file($file_tmp, $destination)) {
-                $conn = get_db_connection();
-                
-                $judul_clean = db_escape($judul_buku);
-                $penulis_clean = db_escape($penulis);
-                $kategori_clean = db_escape($kategori);
-                $kondisi_clean = db_escape($kondisi);
-                $foto_clean = db_escape($unique_filename);
-
-                $insert_query = "INSERT INTO tabel_donasi (id_user, judul_buku, penulis, kategori, kondisi, jumlah, foto, status) 
-                                 VALUES ($user_id, '$judul_clean', '$penulis_clean', '$kategori_clean', '$kondisi_clean', $jumlah, '$foto_clean', 'pending')";
-                
-                if (mysqli_query($conn, $insert_query)) {
-                    // Redirect back to dashboard with success query param
-                    header("Location: dashboard.php?donated=1");
-                    exit;
-                } else {
-                    $error_msg = 'Gagal menyimpan data donasi ke database: ' . mysqli_error($conn);
-                }
+            $insert_query = "INSERT INTO tabel_donasi (id_user, judul_buku, penulis, kategori, kondisi, jumlah, foto, status) 
+                             VALUES ($user_id, '$judul_clean', '$penulis_clean', '$kategori_clean', '$kondisi_clean', $jumlah, '$foto_clean', 'pending')";
+            
+            if (mysqli_query($conn, $insert_query)) {
+                // Redirect back to dashboard with success query param
+                header("Location: dashboard.php?donated=1");
+                exit;
             } else {
-                $error_msg = 'Gagal mengunggah foto ke folder penyimpanan. Periksa izin folder!';
+                $error_msg = 'Gagal menyimpan data donasi ke database: ' . mysqli_error($conn);
             }
         }
     }

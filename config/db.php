@@ -1,22 +1,23 @@
 <?php
 // Database configuration constants
 if (!defined('DB_HOST')) {
-    define('DB_HOST', '127.0.0.1');
-    define('DB_USER', 'root');
-    define('DB_PASS', '');
-    define('DB_NAME', 'db_donasi_buku');
+    define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
+    define('DB_USER', getenv('DB_USER') ?: 'root');
+    define('DB_PASS', getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : '');
+    define('DB_NAME', getenv('DB_NAME') ?: 'db_donasi_buku');
+    define('DB_PORT', getenv('DB_PORT') ?: '3306');
 }
 
 // Disable default mysqli exceptions to handle missing database error manually
 mysqli_report(MYSQLI_REPORT_OFF);
 
 // Connect to database (will return false if database doesn't exist yet)
-$conn = @mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$conn = @mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
 function get_db_connection() {
     global $conn;
     if (!$conn) {
-        $conn = @mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $conn = @mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
         if (!$conn) {
             die("Koneksi Database Gagal: " . mysqli_connect_error());
         }

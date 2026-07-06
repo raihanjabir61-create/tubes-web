@@ -916,9 +916,50 @@ while ($r = mysqli_fetch_assoc($recent_res)) {
                 grid-template-columns: 1fr 1fr;
                 gap: 2rem;
             }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
         }
 
         @media (max-width: 768px) {
+            /* Hero */
+            .hero {
+                padding: 6rem 1.25rem 3.5rem;
+                min-height: auto;
+            }
+
+            .hero-title {
+                font-size: clamp(1.65rem, 6vw, 2.25rem);
+            }
+
+            .hero-desc {
+                font-size: 0.95rem;
+                max-width: 100%;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.65rem;
+            }
+
+            .btn-hero-primary,
+            .btn-hero-ghost {
+                width: 100%;
+                max-width: 320px;
+                justify-content: center;
+            }
+
+            .hero-tag {
+                font-size: 0.72rem;
+            }
+
+            /* Stats bar */
+            .stats-bar {
+                padding: 1.25rem;
+            }
+
             .stats-bar-inner {
                 grid-template-columns: 1fr;
                 gap: 1.25rem;
@@ -935,18 +976,169 @@ while ($r = mysqli_fetch_assoc($recent_res)) {
                 padding-bottom: 0;
             }
 
-            .footer-top {
-                grid-template-columns: 1fr;
-                gap: 1.75rem;
+            .stat-num {
+                font-size: 1.45rem;
+            }
+
+            /* Sections */
+            .section {
+                padding: 3rem 1.25rem;
+            }
+
+            .section-title {
+                font-size: clamp(1.25rem, 4vw, 1.65rem);
+            }
+
+            .section-header-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            /* Steps */
+            .steps-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
             }
 
             .steps-grid::before {
                 display: none;
             }
 
+            .step-card {
+                padding: 2rem 1.25rem 1.5rem;
+            }
+
+            /* Gallery */
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.85rem;
+            }
+
+            .gallery-info {
+                padding: 0.85rem;
+            }
+
+            .gallery-title {
+                font-size: 0.85rem;
+            }
+
+            .gallery-author {
+                font-size: 0.75rem;
+            }
+
+            .gallery-footer {
+                font-size: 0.72rem;
+            }
+
+            /* CTA */
+            .cta-section {
+                padding: 2.5rem 1.25rem;
+            }
+
             .cta-banner {
                 padding: 2.75rem 1.5rem;
                 border-radius: var(--radius-md);
+            }
+
+            .cta-text h2 {
+                font-size: 1.25rem;
+            }
+
+            .cta-text p {
+                font-size: 0.9rem;
+            }
+
+            .cta-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.65rem;
+            }
+
+            .btn-cta {
+                width: 100%;
+                justify-content: center;
+            }
+
+            /* Footer */
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 1.75rem;
+            }
+
+            footer.site-footer {
+                padding: 3rem 1.25rem 1.5rem;
+            }
+
+            .footer-brand-name {
+                font-size: 1.2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Hero */
+            .hero {
+                padding: 5rem 1rem 2.5rem;
+            }
+
+            .hero-title {
+                font-size: 1.55rem;
+            }
+
+            .hero-desc {
+                font-size: 0.88rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-tag {
+                font-size: 0.68rem;
+                margin-bottom: 0.75rem;
+            }
+
+            /* Steps: single column */
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 1.75rem;
+            }
+
+            /* Gallery: single column */
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .gallery-img-wrap {
+                padding-top: 110%;
+            }
+
+            /* CTA */
+            .cta-banner {
+                padding: 2rem 1.25rem;
+            }
+
+            .cta-text h2 {
+                font-size: 1.1rem;
+            }
+
+            /* Section */
+            .section {
+                padding: 2.25rem 0.85rem;
+            }
+
+            .section-sub {
+                font-size: 0.88rem;
+            }
+
+            /* Footer */
+            footer.site-footer {
+                padding: 2.5rem 1rem 1.25rem;
             }
         }
     </style>
@@ -977,6 +1169,31 @@ while ($r = mysqli_fetch_assoc($recent_res)) {
                         <li class="nav-item"><a href="user/dashboard.php">Dashboard</a></li>
                     <?php endif; ?>
                 <?php endif; ?>
+
+                <!-- Mobile-only action buttons (shown inside slide-out menu) -->
+                <li class="nav-actions-mobile">
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                        <?php if ($_SESSION['role'] === 'admin'): ?>
+                            <a href="admin/dashboard.php" class="btn btn-secondary">
+                                <i class="fas fa-user-shield"></i> Dashboard Admin
+                            </a>
+                        <?php else: ?>
+                            <a href="user/dashboard.php" class="btn btn-secondary">
+                                <i class="fas fa-gauge"></i> Dashboard
+                            </a>
+                        <?php endif; ?>
+                        <a href="logout.php" class="btn btn-danger">
+                            <i class="fas fa-sign-out-alt"></i> Keluar
+                        </a>
+                    <?php else: ?>
+                        <a href="login.php" class="btn btn-secondary">
+                            <i class="fas fa-sign-in-alt"></i> Masuk
+                        </a>
+                        <a href="register.php" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i> Daftar Gratis
+                        </a>
+                    <?php endif; ?>
+                </li>
             </ul>
 
             <div class="nav-actions">
@@ -1150,10 +1367,15 @@ while ($r = mysqli_fetch_assoc($recent_res)) {
                 <div class="gallery-grid">
                     <?php while ($book = mysqli_fetch_assoc($gallery_res)): ?>
                         <?php
-                        $foto_path = 'uploads/' . htmlspecialchars($book['foto']);
-                        if (!file_exists($foto_path) || empty($book['foto'])) {
-                            $seed = abs(crc32($book['judul_buku'])) % 1000;
-                            $foto_path = "https://picsum.photos/seed/{$seed}/300/400";
+                        $foto = $book['foto'];
+                        if (strpos($foto, 'data:image/') === 0) {
+                            $foto_path = $foto;
+                        } else {
+                            $foto_path = 'uploads/' . htmlspecialchars($foto);
+                            if (!file_exists($foto_path) || empty($foto)) {
+                                $seed = abs(crc32($book['judul_buku'])) % 1000;
+                                $foto_path = "https://picsum.photos/seed/{$seed}/300/400";
+                            }
                         }
                         $kondisi_text = ($book['kondisi'] === 'baru') ? 'Baru' : 'Bekas Layak';
                         $kondisi_badge = ($book['kondisi'] === 'baru') ? 'badge-diterima' : 'badge-pending';
@@ -1317,16 +1539,9 @@ while ($r = mysqli_fetch_assoc($recent_res)) {
             header.classList.toggle('scrolled', window.scrollY > 40);
         });
 
-        // ---- Mobile nav ----
-        const toggle = document.getElementById('mobile-toggle');
+        // ---- Mobile nav: close menu on anchor click ----
         const navMenu = document.getElementById('nav-menu');
-        if (toggle) {
-            toggle.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                toggle.querySelector('i').className = navMenu.classList.contains('active')
-                    ? 'fas fa-times' : 'fas fa-bars';
-            });
-        }
+        const toggle = document.getElementById('mobile-toggle');
 
         // ---- Scroll reveal ----
         const reveals = document.querySelectorAll('.reveal');

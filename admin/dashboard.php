@@ -113,21 +113,21 @@ $pending_list_res = mysqli_query($conn, $pending_list_query);
             <!-- Statistics Panel -->
             <div class="stats-grid">
                 <div class="stats-card">
-                    <div class="stats-icon" style="color: var(--primary); background-color: var(--primary-light);"><i class="fas fa-users-viewfinder"></i></div>
+                    <div class="stats-icon"><i class="fas fa-users-viewfinder"></i></div>
                     <div class="stats-info">
                         <h3><?php echo number_format($total_users); ?></h3>
                         <p>Total Donatur</p>
                     </div>
                 </div>
                 <div class="stats-card">
-                    <div class="stats-icon" style="color: var(--success); background-color: var(--success-bg);"><i class="fas fa-circle-check"></i></div>
+                    <div class="stats-icon"><i class="fas fa-circle-check"></i></div>
                     <div class="stats-info">
                         <h3><?php echo number_format($total_books); ?></h3>
                         <p>Buku Diterima</p>
                     </div>
                 </div>
                 <div class="stats-card">
-                    <div class="stats-icon" style="color: var(--warning); background-color: var(--warning-bg);"><i class="fas fa-hourglass-half"></i></div>
+                    <div class="stats-icon"><i class="fas fa-hourglass-half"></i></div>
                     <div class="stats-info">
                         <h3 id="stats-pending-count"><?php echo number_format($total_pending); ?></h3>
                         <p>Menunggu Verifikasi</p>
@@ -180,13 +180,13 @@ $pending_list_res = mysqli_query($conn, $pending_list_query);
                                             <div style="font-size: 0.8rem; color: var(--text-muted);">Penulis: <?php echo htmlspecialchars($row['penulis']); ?></div>
                                         </td>
                                         <td>
-                                            <span style="font-size: 0.85rem; background-color: var(--primary-light); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-weight: 500;">
+                                            <span style="font-size: 0.85rem; background-color: var(--teal-light); color: var(--teal); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-weight: 500;">
                                                 <?php echo htmlspecialchars($row['kategori']); ?>
                                             </span>
                                         </td>
                                         <td>
                                             <div><?php echo $kondisi_text; ?></div>
-                                            <div style="font-weight: 700; font-size: 0.9rem; color: var(--primary);"><?php echo htmlspecialchars($row['jumlah']); ?> eks</div>
+                                            <div style="font-weight: 700; font-size: 0.9rem; color: var(--teal);"><?php echo htmlspecialchars($row['jumlah']); ?> eks</div>
                                         </td>
                                         <td>
                                             <div style="font-weight: 600;"><?php echo htmlspecialchars($row['donor_nama']); ?></div>

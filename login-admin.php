@@ -64,44 +64,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="assets/css/form.css">
     
     <style>
-        /* Dedicated styling overrides for admin login */
+        /* Dedicated styling overrides for admin login using new variable palette */
         body {
-            background-color: hsl(222, 47%, 6%);
+            background-color: var(--ink);
         }
         .auth-card {
-            background-color: var(--dark-card);
-            border-color: rgba(255, 255, 255, 0.05);
+            background-color: var(--ink-soft);
+            border-color: rgba(255, 255, 255, 0.08);
             color: white;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
         .auth-header h2 {
             color: white;
         }
+        .auth-header p {
+            color: hsla(0, 0%, 100%, 0.6);
+        }
         .form-label {
-            color: hsl(215, 16%, 75%);
+            color: hsla(0, 0%, 100%, 0.85);
         }
         .input-control {
-            background-color: hsl(222, 47%, 10%);
-            border-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--ink);
+            border-color: rgba(255, 255, 255, 0.15);
             color: white;
         }
         .input-control:focus {
-            background-color: hsl(222, 47%, 8%);
-            border-color: var(--primary);
+            background-color: var(--ink);
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(172, 56, 34, 0.25);
         }
         .form-footer a {
-            color: var(--primary);
+            color: var(--teal-light);
         }
         .admin-badge {
-            background-color: rgba(114, 46, 209, 0.2);
-            color: hsl(256, 82%, 75%);
+            background-color: rgba(172, 56, 34, 0.2);
+            color: var(--teal-light);
             padding: 0.25rem 0.75rem;
             border-radius: 50px;
             font-size: 0.75rem;
             font-weight: 700;
             display: inline-block;
             margin-bottom: 1rem;
-            border: 1px solid rgba(114, 46, 209, 0.3);
+            border: 1px solid rgba(172, 56, 34, 0.3);
+            letter-spacing: 0.08em;
         }
     </style>
 </head>
@@ -110,8 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="auth-wrapper" style="background-color: transparent;">
         <div class="auth-card">
             <div class="auth-header">
-                <a href="index.php" class="nav-brand" style="justify-content: center; margin-bottom: 1rem;">
-                    <i class="fas fa-shield-halved"></i>
+                <a href="index.php" class="nav-brand" style="justify-content: center; margin-bottom: 1rem; color: white;">
+                    <i class="fas fa-shield-halved" style="color: var(--teal);"></i>
                     <span>DonasiBuku</span>
                 </a>
                 <div class="admin-badge">ADMINISTRATOR GATE</div>
@@ -136,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
             
             <div class="form-footer">
-                Bukan admin? <a href="login.php" style="color: hsl(256, 82%, 75%);">Kembali ke Portal User</a>
+                Bukan admin? <a href="login.php" style="color: var(--teal-light);">Kembali ke Portal User</a>
             </div>
         </div>
     </div>

@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="auth-card">
             <div class="auth-header">
                 <a href="index.php" class="nav-brand" style="justify-content: center; margin-bottom: 1.5rem;">
-                    <i class="fas fa-book-heart"></i>
+                    <i class="fas fa-book-open-reader"></i>
                     <span>DonasiBuku</span>
                 </a>
                 <h2>Mulai Berbagi Kebaikan</h2>

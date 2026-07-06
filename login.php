@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="auth-card">
             <div class="auth-header">
                 <a href="index.php" class="nav-brand" style="justify-content: center; margin-bottom: 1.5rem;">
-                    <i class="fas fa-book-heart"></i>
+                    <i class="fas fa-book-open-reader"></i>
                     <span>DonasiBuku</span>
                 </a>
                 <h2>Selamat Datang Kembali</h2>
@@ -93,9 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="form-group">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                        <label for="password" class="form-label" style="margin: 0;">Password</label>
-                    </div>
+                    <label for="password" class="form-label">Password</label>
                     <input type="password" id="password" name="password" class="input-control" placeholder="Masukkan password Anda" required>
                 </div>
 
@@ -106,8 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <div class="form-footer">
                 Belum punya akun? <a href="register.php">Daftar sekarang</a>
-                <div style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-                    <a href="login-admin.php" style="color: var(--text-muted); font-size: 0.85rem; font-weight: 500;">
+                <div style="margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                    <a href="login-admin.php" style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">
                         <i class="fas fa-user-shield"></i> Masuk sebagai Admin
                     </a>
                 </div>

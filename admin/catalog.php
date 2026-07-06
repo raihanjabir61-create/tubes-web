@@ -207,7 +207,7 @@ $catalog_res = mysqli_query($conn, $query_str);
                                             <div style="font-size: 0.8rem; color: var(--text-muted);">Penulis: <?php echo htmlspecialchars($row['penulis']); ?></div>
                                         </td>
                                         <td>
-                                            <span style="font-size: 0.85rem; background-color: var(--primary-light); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-weight: 500;">
+                                            <span style="font-size: 0.85rem; background-color: var(--teal-light); color: var(--teal); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-weight: 500;">
                                                 <?php echo htmlspecialchars($row['kategori']); ?>
                                             </span>
                                         </td>

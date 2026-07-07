@@ -161,9 +161,14 @@ $pending_list_res = mysqli_query($conn, $pending_list_query);
                             <?php if (mysqli_num_rows($pending_list_res) > 0): ?>
                                 <?php while ($row = mysqli_fetch_assoc($pending_list_res)): ?>
                                     <?php 
-                                        $foto_path = '../uploads/' . htmlspecialchars($row['foto']);
-                                        if (!file_exists($foto_path) || empty($row['foto'])) {
-                                            $foto_path = 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=150';
+                                        $foto = $row['foto'];
+                                        if (strpos($foto, 'data:image/') === 0) {
+                                            $foto_path = $foto;
+                                        } else {
+                                            $foto_path = '../uploads/' . htmlspecialchars($foto);
+                                            if (!file_exists($foto_path) || empty($foto)) {
+                                                $foto_path = 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=150';
+                                            }
                                         }
                                         $kondisi_text = ($row['kondisi'] === 'baru') ? 'Baru' : 'Bekas Layak';
                                         $wa_link = 'https://wa.me/' . preg_replace('/[^0-9]/', '', $row['donor_telp']);

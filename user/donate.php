@@ -40,7 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // Read file content and convert to base64
             $file_data = file_get_contents($file_tmp);
-            $base64_data = 'data:' . mime_content_type($file_tmp) . ';base64,' . base64_encode($file_data);
+            $mime_type = isset($file['type']) && !empty($file['type']) ? $file['type'] : 'image/jpeg';
+            if (function_exists('mime_content_type')) {
+                $mime_type = mime_content_type($file_tmp);
+            }
+            $base64_data = 'data:' . $mime_type . ';base64,' . base64_encode($file_data);
 
             // Optional: save to local uploads folder if writable (for local fallback)
             $upload_dir = '../uploads/';

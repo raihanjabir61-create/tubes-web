@@ -177,9 +177,14 @@ $catalog_res = mysqli_query($conn, $query_str);
                             <?php if (mysqli_num_rows($catalog_res) > 0): ?>
                                 <?php while ($row = mysqli_fetch_assoc($catalog_res)): ?>
                                     <?php 
-                                        $foto_path = '../uploads/' . htmlspecialchars($row['foto']);
-                                        if (!file_exists($foto_path) || empty($row['foto'])) {
-                                            $foto_path = 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=150';
+                                        $foto = $row['foto'];
+                                        if (strpos($foto, 'data:image/') === 0) {
+                                            $foto_path = $foto;
+                                        } else {
+                                            $foto_path = '../uploads/' . htmlspecialchars($foto);
+                                            if (!file_exists($foto_path) || empty($foto)) {
+                                                $foto_path = 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=150';
+                                            }
                                         }
                                         $status = $row['status'];
                                         $badge_class = 'badge-pending';
